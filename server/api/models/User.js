@@ -25,6 +25,10 @@ module.exports = {
       type: 'string',
       enum: ['civilian', 'manicipality', 'business'],
       required: true
+    },
+    vouchers : {
+      collection: 'voucher',
+      via: 'business'
     }
   }
 };
