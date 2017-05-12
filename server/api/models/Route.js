@@ -11,9 +11,9 @@ module.exports = {
     id: {
       type: 'integer',
       unique: true,
-      autoIncrement: true,
-      required: true
-    }
+      primaryKey: true,
+      autoIncrement: true
+    },
     points: {
       required: true,
       collection: 'point'

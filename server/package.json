@@ -5,6 +5,7 @@
   "description": "Smart accessibility, application backend",
   "keywords": [],
   "dependencies": {
+    "ejs": "^2.5.6",
     "include-all": "^1.0.0",
     "rc": "1.0.1",
     "sails": "~0.12.13",
