@@ -21,6 +21,10 @@ module.exports = {
     },
     image: {
       type: 'string'
+    },
+    reviews: {
+      collection: 'review',
+      via: 'report'
     }
 
   }
