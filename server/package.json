@@ -1,0 +1,24 @@
+{
+  "name": "smart-accessibility-server",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Smart accessibility, application backend",
+  "keywords": [],
+  "dependencies": {
+    "include-all": "^1.0.0",
+    "rc": "1.0.1",
+    "sails": "~0.12.13",
+    "sails-disk": "~0.10.9"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/crowdhackathon-smartcity/Enable-Accessibility.git"
+  },
+  "author": "karatakis",
+  "license": ""
+}
