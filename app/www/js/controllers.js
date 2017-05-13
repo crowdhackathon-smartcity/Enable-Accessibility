@@ -316,7 +316,60 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
+  var map = new GMaps({
+    div: '#map_live',
+    zoom: 14,
+    lat: 37.961899,
+    lng: 23.691257
+  });
 
+  var iconBase = "https://dl.dropboxusercontent.com/s/";
+  var icons = {
+    green_wheel: {
+      name: "green_wheel",
+      icon: iconBase + "efi55gzd5ydxsnt/green_wheel.png?dl=0"
+    },
+    orange_wheel: {
+      name: "orange_wheel",
+      icon: iconBase + "8f7x7t90ejxkc3l/orange_wheel.png?dl=0"
+    }
+  };
+
+  var points = [
+    {
+      lat: 37.96187858573322,
+      lng: 23.690396547317505,
+      icon: icons.green_wheel.icon,
+      infoWindow: {
+        content: '<p>Free Parking Space </p>'
+      }
+    },{
+      lat: 37.95351338271297,
+      lng: 23.694315254688263,
+      icon: icons.orange_wheel.icon,
+      infoWindow: {
+        content: '<p>Reserved Parking Space </p>'
+      }
+    },{
+      lat: 37.9656384399164,
+      lng: 23.69424819946289,
+      icon: icons.green_wheel.icon,
+      infoWindow: {
+        content: '<p>Free Parking Space </p>'
+      }
+    },{
+      lat: 37.963885415998256,
+      lng: 23.69633361697197,
+      icon: icons.orange_wheel.icon,
+      infoWindow: {
+        content: '<p>Reserved Parking Space </p>'
+      }
+    }
+  ];
+
+  points.forEach(function(point) {
+    map.addMarker(point);
+  });
 
 }])
 
