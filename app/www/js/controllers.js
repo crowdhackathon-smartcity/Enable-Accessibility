@@ -153,16 +153,11 @@ function ($scope, SettingsService, $stateParams) {
   $scope.units = SettingsService.units;
   $scope.dataShare = SettingsService.dataShare;
 
-  $scope.updateMob = function() {
-    SettingsService.mobility = $scope.mobility;
-  };
-
-  $scope.updateUnits = function() {
+  $scope.save = function() {
+    console.log($scope.mobility);
+    SettingsService.updateMobility($scope.mobility);
     SettingsService.units = $scope.units;
-  };
-
-  $scope.updateData = function() {
-    SettingsService.dataShare = $scope.dataShare;
+    SettingsService.updateDataShare($scope.dataShare);
   };
 
 }])
