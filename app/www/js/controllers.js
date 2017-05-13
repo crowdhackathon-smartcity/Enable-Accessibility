@@ -11,52 +11,87 @@ function ($scope, $stateParams, SettingsService) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
-  var list = [];
-  var path = [];
-
-  function addList(item) {
-    list.push(item);
-  }
-
-  function addPath(lng, lat) {
-    path.push([lat, lng]);
-  }
-
-  $scope.getCoords = function() {
-    $scope.list = list;
-    $scope.itemsText = "";
-    list.forEach(function(item) {
-      list += item + ",";
-    });
-  };
-
-  $scope.draw = function() {
-    map.drawPolyline({
-      path: path,
-      strokeColor: '#131540',
-      strokeOpacity: 0.6,
-      strokeWeight: 6
-    });
-  };
-
   var map = new GMaps({
     div: '#map',
     zoom: 14,
-    lat: 37.9671,
-    lng: 23.6947,
-    click: function(e) {
-      addList({lat:e.latLng.lat(), lng: e.latLng.lng()});
-      addPath(e.latLng.lng(), e.latLng.lat());
-      map.addMarker({
-        lng: e.latLng.lng(),
-        lat: e.latLng.lat(),
-        infoWindow: {
-          // TODO marker Description
-          content: '<h4>Marker</h4><p>Marker Description <a href="#/feedback" id="map-feedback" class="button button-small button-positive  button-block">Leave a comment</a></p>'
-        }
-      });
-    }
+    lat: 37.961899,
+    lng: 23.691257
   });
+
+  var iconBase = "https://dl.dropboxusercontent.com/s/";
+
+  var icons = {
+    wheel_chair: {
+      name: 'wheel chair',
+      icon: iconBase + "jdsz8fv4ktnbkmk/wheel_chair.png?dl=0"
+    },
+    ramp: {
+      name: 'ramp',
+      icon: iconBase + "mmjiwgz209wk0g1/ramp.png?dl=0"
+    },
+    red_wheel: {
+      name: 'no access',
+      icon: iconBase + "56ej4x1njvw1o3p/red_wheel.png?dl=0"
+    },
+    visual_imp: {
+      name: 'visual impaired',
+      icon: iconBase + "xk0x22k3dr6x18p/vi.png?dl=0"
+    },
+    elev: {
+      name: 'elevator',
+      icon: iconBase + "1dekpsgo4p10zwn/wheel_elevator.png?dl=0"
+    }
+  };
+
+  var points = [
+    {
+      lat: 37.96187858573322,
+      lng: 23.690396547317505,
+      icon: icons.wheel_chair.icon
+    },{
+      lat: 37.95351338271297,
+      lng: 23.694315254688263,
+      icon: icons.red_wheel.icon
+    },{
+      lat: 37.96260604160774,
+      lng: 23.690943717956543,
+      icon: icons.ramp.icon
+    },{
+      lat: 37.96296130813673,
+      lng: 23.69128704071045,
+      icon: icons.elev.icon
+    },{
+      lat: 37.95564204768705,
+      lng: 23.692355901002884,
+      icon: icons.red_wheel.icon
+    },{
+      lat: 37.95967925670532,
+      lng: 23.689310252666473,
+      icon: icons.red_wheel.icon
+    },{
+      lat: 37.9656384399164,
+      lng: 23.69424819946289,
+      icon: icons.red_wheel.icon
+    },{
+      lat: 37.963885415998256,
+      lng: 23.69633361697197,
+      icon: icons.red_wheel.icon
+    },{
+      lat: 37.96864533884555,
+      lng: 23.693947792053223,
+      icon: icons.elev.icon
+    }
+  ];
+
+  points.forEach(function(point) {
+    map.addMarker({
+      lat: point.lat,
+      lng: point.lng,
+      icon: point.icon
+    });
+  });
+
+
 }])
 
 .controller('reportCtrl', ['$scope', '$http', 'SettingsService', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
