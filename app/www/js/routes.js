@@ -124,10 +124,14 @@ angular.module('app.routes', [])
     }
   })
 
-  .state('navigationMap', {
+  .state('smartAccessibility.navigationMap', {
     url: '/mockmap_nav',
-    templateUrl: 'templates/navigationMap.html',
-    controller: 'navigationMapCtrl'
+    views: {
+      'side-menu21': {
+        templateUrl: 'templates/navigationMap.html',
+        controller: 'navigationMapCtrl'
+      }
+    }
   })
 
   .state('accessibilityMap', {
@@ -136,10 +140,14 @@ angular.module('app.routes', [])
     controller: 'accessibilityMapCtrl'
   })
 
-  .state('liveTrackingMap', {
+  .state('smartAccessibility.liveTrackingMap', {
     url: '/mockmap_live',
-    templateUrl: 'templates/liveTrackingMap.html',
-    controller: 'liveTrackingMapCtrl'
+    views: {
+      'side-menu21': {
+        templateUrl: 'templates/liveTrackingMap.html',
+        controller: 'liveTrackingMapCtrl'
+      }
+    }
   })
 
   .state('smartAccessibility.vouchersPromotions', {

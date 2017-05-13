@@ -7,10 +7,10 @@ function ($scope, $stateParams, SettingsService) {
   $scope.points = SettingsService.points;
 }])
 
-.controller('mapCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('mapCtrl', ['$scope', '$stateParams', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams, $state) {
   var map = new GMaps({
     div: '#map',
     zoom: 14,
@@ -111,6 +111,14 @@ function ($scope, $stateParams) {
     });
   });
 
+  $scope.search = function(text) {
+    console.log(text);
+    if (text == "parking" || text == "Parking") {
+      $state.go("smartAccessibility.liveTrackingMap");
+    } else {
+      $state.go("smartAccessibility.navigationMap");
+    }
+  };
 
 }])
 
@@ -300,7 +308,62 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
+  var map = new GMaps({
+    div: '#map_nav',
+    zoom: 16,
+    lat: 40.624090,
+    lng: 22.951060
+  });
 
+  var points = [
+    { lat: 40.626400, lng: 22.948675 },
+    { lat: 40.614706, lng: 22.952559 }
+  ];
+
+  var lines = [
+    {
+      color: "#0604FF",
+      points: [
+                { lat: 40.626400, lng: 22.948675 },
+                { lat: 40.623648, lng: 22.952259 },
+                { lat: 40.622410, lng: 22.951958 },
+                { lat: 40.618810, lng: 22.953203 },
+                { lat: 40.614706, lng: 22.952559 }
+              ]
+    },{
+      color: "#000",
+      points: [
+                { lat: 40.626400, lng: 22.948675 },
+                { lat: 40.626280, lng: 22.948924 },
+                { lat: 40.625224, lng: 22.948047 },
+                { lat: 40.622740, lng: 22.951416 },
+                { lat: 40.620802, lng: 22.952049 },
+                { lat: 40.616867, lng: 22.951536 },
+                { lat: 40.616619, lng: 22.952643 },
+                { lat: 40.615609, lng: 22.952461 },
+                { lat: 40.615202, lng: 22.952665 },
+                { lat: 40.614706, lng: 22.952559 }
+              ]
+    }
+
+  ];
+
+  points.forEach(function(point) {
+    map.addMarker({
+      lat: point.lat,
+      lng: point.lng,
+      icon: point.icon
+    });
+  });
+
+  lines.forEach(function(line) {
+    map.drawPolyline({
+      path: line.points,
+      strokeColor: line.color,
+      strokeOpacity: 1.0,
+      strokeWeight: 4
+    });
+  });
 
 }])
 
