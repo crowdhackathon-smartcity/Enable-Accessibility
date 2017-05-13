@@ -20,7 +20,7 @@ module.exports = {
     },
     type: {
       type: 'string',
-      enum: ['ramp', 'obstacle', 'lift', 'noise-light']
+      enum: ['ramp', 'obstacle', 'lift', 'parking']
     },
     description: {
       type: 'string'

@@ -59,11 +59,26 @@ function ($scope, $stateParams) {
   });
 }])
 
-.controller('reportCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('reportCtrl', ['$scope', '$http', 'SettingsService', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $http, SettingsService, $stateParams) {
+  $scope.type = 'ramp';
 
+  $scope.save = function() {
+    var url = SettingsService.url + "/report";
+    var data = {
+      point: {
+        // TODO use actual position
+        lng: 30.5489,
+        lat: 27.3256
+      },
+      type: $scope.type,
+      description: $scope.comment
+      // TODO send image
+    };
+    $http.post(url, data);
+  };
 
 }])
 
