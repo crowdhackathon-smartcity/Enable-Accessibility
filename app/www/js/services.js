@@ -4,6 +4,8 @@ angular.module('app.services', [])
 
 }])
 
-.service('BlankService', [function(){
+.service('SettingsService', [function(){
+  var _points = 100;
 
+  this.points = _points;
 }]);

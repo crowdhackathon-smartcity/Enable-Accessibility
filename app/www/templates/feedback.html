@@ -6,7 +6,7 @@
     <form id="feedback-form10" class="list">
       <label class="item item-select" id="feedback-select4" name="rating">
         <span class="input-label">Rate</span>
-        <select>
+        <select ng-model="rating">
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -15,8 +15,8 @@
         </select>
       </label>
       <label class="item item-input" id="feedback-textarea2" name="comment">
-        <span class="input-label">Comment</span><textarea placeholder="comment"></textarea></label>
+        <span class="input-label">Comment</span><textarea placeholder="comment" ng-model="comment"></textarea></label>
     </form>
-    <button id="feedback-button17" class="button button-positive  button-block">Save</button>
+    <button id="feedback-button17" class="button button-positive  button-block" ng-click="save()">Save</button>
   </ion-content>
 </ion-view>
