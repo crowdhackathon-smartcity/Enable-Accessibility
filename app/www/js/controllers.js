@@ -83,11 +83,31 @@ function ($scope, $stateParams) {
     }
   ];
 
+  var lines = [
+    {
+      color: '#40FF00',
+      points: [{ lat: 37.961112, lng: 23.692995 }, { lat: 37.961714, lng: 23.692734 }]
+    },{
+      color: "#f00",
+      points: [ { lat: 37.968091, lng: 23.693950 }, { lat: 37.968478, lng: 23.695436 } ]
+    }
+
+  ];
+
   points.forEach(function(point) {
     map.addMarker({
       lat: point.lat,
       lng: point.lng,
       icon: point.icon
+    });
+  });
+
+  lines.forEach(function(line) {
+    map.drawPolyline({
+      path: line.points,
+      strokeColor: line.color,
+      strokeOpacity: 0.6,
+      strokeWeight: 6
     });
   });
 
@@ -174,7 +194,6 @@ function ($scope, $stateParams) {
     }
   });
 
-  // TODO mobile not working
   // TODO hide municipality
   // TODO use labels and descriptions
 
