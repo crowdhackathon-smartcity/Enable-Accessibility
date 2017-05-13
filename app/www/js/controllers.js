@@ -124,8 +124,35 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
+  var map = new GMaps({
+    div: '#map',
+    zoom: 15,
+    lat: 37.961899,
+    lng: 23.691257,
+    markerClusterer: function(map) {
+      options = {
+        gridSize: 40
+      }
 
+      return new MarkerClusterer(map, map.markers, options);
+    }
+  });
 
+  points = [
+    {lat: 37.967531, lng: 23.694797},
+    {lat: 37.963306, lng: 23.692103},
+    {lat: 37.958329, lng: 23.683769},
+    {lat: 37.959381, lng: 23.683224},
+    {lat: 37.968144, lng: 23.696800}
+  ];
+
+  points.forEach(function(point) {
+    map.addMarker({
+       lat: point.lat,
+       lng: point.lng,
+       label: '!'
+   });
+  });
 }])
 
 .controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
