@@ -7,8 +7,8 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
+
+
 
       .state('smartAccessibility.user', {
     url: '/user',
@@ -105,7 +105,7 @@ angular.module('app.routes', [])
   })
 
   .state('smartAccessibility.reportList', {
-    url: '/report list',
+    url: '/report_list',
     views: {
       'side-menu21': {
         templateUrl: 'templates/reportList.html',
@@ -115,7 +115,7 @@ angular.module('app.routes', [])
   })
 
   .state('smartAccessibility.reviewList', {
-    url: '/reviews list',
+    url: '/reviews_list',
     views: {
       'side-menu21': {
         templateUrl: 'templates/reviewList.html',
@@ -143,7 +143,7 @@ angular.module('app.routes', [])
   })
 
   .state('smartAccessibility.vouchersPromotions', {
-    url: '/page21',
+    url: '/vouchers',
     views: {
       'side-menu21': {
         templateUrl: 'templates/vouchersPromotions.html',
@@ -153,13 +153,13 @@ angular.module('app.routes', [])
   })
 
   .state('addVoucherPromotion', {
-    url: '/page22',
+    url: '/addVoucher',
     templateUrl: 'templates/addVoucherPromotion.html',
     controller: 'addVoucherPromotionCtrl'
   })
 
 $urlRouterProvider.otherwise('/list-menu/map')
 
-  
+
 
 });
