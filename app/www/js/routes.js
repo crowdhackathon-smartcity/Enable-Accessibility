@@ -32,6 +32,7 @@ angular.module('app.routes', [])
 
   .state('smartAccessibility.report', {
     url: '/report',
+    params: {lat: 0, lng: 0},
     views: {
       'side-menu21': {
         templateUrl: 'templates/report.html',

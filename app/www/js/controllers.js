@@ -15,7 +15,10 @@ function ($scope, $stateParams, $state) {
     div: '#map',
     zoom: 14,
     lat: 37.961899,
-    lng: 23.691257
+    lng: 23.691257,
+    click: function(e) {
+      $state.go("smartAccessibility.report", {lat: e.latLng.lat(), lng: e.latLng.lng()});
+    }
   });
 
   var iconBase = "https://dl.dropboxusercontent.com/s/";
@@ -122,25 +125,26 @@ function ($scope, $stateParams, $state) {
 
 }])
 
-.controller('reportCtrl', ['$scope', '$http', 'SettingsService', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('reportCtrl', ['$scope', '$http', 'SettingsService', '$stateParams', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $http, SettingsService, $stateParams) {
-  $scope.type = 'ramp';
+function ($scope, $http, SettingsService, $stateParams, $state) {
+  $scope.type = "ramp";
 
-  $scope.save = function() {
+  $scope.save = function(type, comment) {
     var url = SettingsService.url + "/report";
     var data = {
       point: {
         // TODO use actual position
-        lng: 30.5489,
-        lat: 27.3256
+        lng: $stateParams.lng,
+        lat: $stateParams.lat
       },
-      type: $scope.type,
-      description: $scope.comment
+      type: type,
+      description: comment
       // TODO send image
     };
     $http.post(url, data);
+    $state.go("smartAccessibility.map");
   };
 
 }])
@@ -184,7 +188,7 @@ function ($scope, $stateParams) {
 function ($scope, $stateParams) {
   var map = new GMaps({
     div: '#map_municipality',
-    zoom: 15,
+    zoom: 13,
     lat: 37.961899,
     lng: 23.691257,
     markerClusterer: function(map) {

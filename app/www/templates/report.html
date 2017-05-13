@@ -5,8 +5,8 @@
     </div>
     <form id="report-form5" class="list">
       <label class="item item-select" id="report-select1" name="problem">
-        <span class="input-label" ng-model="type">Type of problem</span>
-        <select>
+        <span class="input-label">Type of problem</span>
+        <select ng-model="type">
           <option>ramp</option>
           <option>obstacle</option>
           <option>lift</option>
@@ -15,7 +15,7 @@
       </label>
       <label class="item item-input" id="report-textarea1" name="comment">
         <span class="input-label">Leave a comment</span><textarea placeholder="comment" ng-model="comment"></textarea></label>
-      <button id="report-button16" class="button button-positive  button-block" ng-click="save()">Save</button>
+      <button id="report-button16" class="button button-positive  button-block" ng-click="save(type, comment)">Save</button>
     </form>
   </ion-content>
 </ion-view>
