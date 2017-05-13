@@ -25,7 +25,8 @@ module.exports = {
       required: true
     },
     comment: {
-      type: 'string'
+      type: 'string',
+	  defaultsTo: ""
     },
     image: {
       type: 'string'

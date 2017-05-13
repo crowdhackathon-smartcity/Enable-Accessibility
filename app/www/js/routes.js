@@ -100,7 +100,7 @@ angular.module('app.routes', [])
   })
 
   .state('feedback', {
-    url: '/feedback',
+    url: '/feedback/{id}',
     templateUrl: 'templates/feedback.html',
     controller: 'feedbackCtrl'
   })

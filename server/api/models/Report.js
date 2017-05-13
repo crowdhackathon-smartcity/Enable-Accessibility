@@ -20,10 +20,11 @@ module.exports = {
     },
     type: {
       type: 'string',
-      enum: ['ramp', 'obstacle', 'lift', 'parking']
+      enum: ['ramp', 'obstacle', 'lift', 'parking', 'problem']
     },
     description: {
-      type: 'string'
+      type: 'string',
+	  defaultsTo: ""
     },
     image: {
       type: 'string'

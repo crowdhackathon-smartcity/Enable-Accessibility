@@ -7,10 +7,10 @@ function ($scope, $stateParams, SettingsService) {
   $scope.points = SettingsService.points;
 }])
 
-.controller('mapCtrl', ['$scope', '$stateParams', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('mapCtrl', ['$scope', '$stateParams', '$state', '$http', 'SettingsService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $state) {
+function ($scope, $stateParams, $state, $http, SettingsService) {
   var map = new GMaps({
     div: '#map',
     zoom: 14,
@@ -24,7 +24,7 @@ function ($scope, $stateParams, $state) {
   var iconBase = "https://dl.dropboxusercontent.com/s/";
 
   var icons = {
-    wheel_chair: {
+    parking: {
       name: 'wheel chair',
       icon: iconBase + "jdsz8fv4ktnbkmk/wheel_chair.png?dl=0"
     },
@@ -32,7 +32,11 @@ function ($scope, $stateParams, $state) {
       name: 'ramp',
       icon: iconBase + "mmjiwgz209wk0g1/ramp.png?dl=0"
     },
-    red_wheel: {
+    problem: {
+      name: 'no access',
+      icon: iconBase + "56ej4x1njvw1o3p/red_wheel.png?dl=0"
+    },
+    obstacle: {
       name: 'no access',
       icon: iconBase + "56ej4x1njvw1o3p/red_wheel.png?dl=0"
     },
@@ -40,51 +44,30 @@ function ($scope, $stateParams, $state) {
       name: 'visual impaired',
       icon: iconBase + "xk0x22k3dr6x18p/vi.png?dl=0"
     },
-    elev: {
+    lift: {
       name: 'elevator',
       icon: iconBase + "1dekpsgo4p10zwn/wheel_elevator.png?dl=0"
     }
   };
 
-  var points = [
-    {
-      lat: 37.96187858573322,
-      lng: 23.690396547317505,
-      icon: icons.wheel_chair.icon
-    },{
-      lat: 37.95351338271297,
-      lng: 23.694315254688263,
-      icon: icons.red_wheel.icon
-    },{
-      lat: 37.96260604160774,
-      lng: 23.690943717956543,
-      icon: icons.ramp.icon
-    },{
-      lat: 37.96296130813673,
-      lng: 23.69128704071045,
-      icon: icons.elev.icon
-    },{
-      lat: 37.95564204768705,
-      lng: 23.692355901002884,
-      icon: icons.red_wheel.icon
-    },{
-      lat: 37.95967925670532,
-      lng: 23.689310252666473,
-      icon: icons.red_wheel.icon
-    },{
-      lat: 37.9656384399164,
-      lng: 23.69424819946289,
-      icon: icons.red_wheel.icon
-    },{
-      lat: 37.963885415998256,
-      lng: 23.69633361697197,
-      icon: icons.red_wheel.icon
-    },{
-      lat: 37.96864533884555,
-      lng: 23.693947792053223,
-      icon: icons.elev.icon
-    }
-  ];
+  var url = SettingsService.url + "/report";
+
+  $http.get(url).then(function(response) {
+    var reports = response.data;
+
+    reports.forEach(function(report) {
+      map.addMarker({
+        lat: report.point.lat,
+        lng: report.point.lng,
+        icon: icons[report.type].icon,
+        infoWindow: {
+          content: '<h4>' + report.type + '</h4><p>' + report.description  + '</p>  <a href="#/feedback/' + report.id + '" class="button button-small button-positive  button-block">Review</a>'
+        }
+      });
+    });
+  }, function(error) {
+
+  });
 
   var lines = [
     {
@@ -96,14 +79,6 @@ function ($scope, $stateParams, $state) {
     }
 
   ];
-
-  points.forEach(function(point) {
-    map.addMarker({
-      lat: point.lat,
-      lng: point.lng,
-      icon: point.icon
-    });
-  });
 
   lines.forEach(function(line) {
     map.drawPolyline({
@@ -272,17 +247,17 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $http, $stateParams, $state) {
-  $scope.rating = '1';
+  $scope.rating = '3';
+  console.log($stateParams);
 
-  $scope.save = function() {
+  $scope.save = function(rating, comment) {
     var url = "http://192.168.0.152:1337/review";
     var data = {
       report: {
-        // TODO use actual id
-        id: 1
+        id: $stateParams.id
       },
-      ranking: $scope.rating,
-      comment: $scope.comment
+      ranking: rating,
+      comment: comment
       // TODO ionic get image
     };
     $http.post(url, data);
@@ -293,6 +268,14 @@ function ($scope, $http, $stateParams, $state) {
 }])
 
 .controller('reportListCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams) {
+
+
+}])
+
+.controller('reviewCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
