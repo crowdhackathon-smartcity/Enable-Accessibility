@@ -24,6 +24,7 @@ angular.module('app.routes', [])
     url: '/map',
     views: {
       'side-menu21': {
+        cache: false,
         templateUrl: 'templates/map.html',
         controller: 'mapCtrl'
       }

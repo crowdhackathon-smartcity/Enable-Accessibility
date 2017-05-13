@@ -66,7 +66,6 @@ function ($scope, $stateParams, $state, $http, SettingsService) {
       });
     });
   }, function(error) {
-
   });
 
   var lines = [
@@ -118,8 +117,12 @@ function ($scope, $http, SettingsService, $stateParams, $state) {
       description: comment
       // TODO send image
     };
-    $http.post(url, data);
-    $state.go("smartAccessibility.map");
+    $http.post(url, data).then(function(response) {
+      $state.go("smartAccessibility.map");
+    }, function(error) {
+
+    });
+
   };
 
 }])
@@ -291,15 +294,36 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('navigationMapCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('navigationMapCtrl', ['$scope', '$stateParams', '$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams, $http) {
+
+  // TODO refresh after creating report
   var map = new GMaps({
     div: '#map_nav',
     zoom: 16,
     lat: 40.624090,
     lng: 22.951060
+  });
+
+  var wheelMapUrl = "js/nodes.js";
+  $http.get(wheelMapUrl).then(function(response) {
+    response.data.nodes.forEach(function(node) {
+      if (!node.name) {
+        node.name = "Business"
+      }
+      map.addMarker({
+        lat: node.lat,
+        lng: node.lon,
+        icon: 'https://dl.dropboxusercontent.com/s/8g1zqs3tec7b7j6/green_house.png?dl=0',
+        infoWindow: {
+          content: '<h4>' + node.name + '</h4><p>' + node.node_type.identifier + '</p>'
+        }
+      });
+    });
+  }, function(error) {
+    console.log(error);
   });
 
   var points = [
