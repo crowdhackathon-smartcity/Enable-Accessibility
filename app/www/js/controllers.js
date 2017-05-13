@@ -125,18 +125,23 @@ function ($scope, $stateParams) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
   var map = new GMaps({
-    div: '#map',
+    div: '#map_municipality',
     zoom: 15,
     lat: 37.961899,
     lng: 23.691257,
     markerClusterer: function(map) {
       options = {
-        gridSize: 40
+        gridSize: 40,
+        imagePath: 'https://users.auth.gr/karatakis/m'
       }
 
       return new MarkerClusterer(map, map.markers, options);
     }
   });
+
+  // TODO mobile not working
+  // TODO hide municipality
+  // TODO use labels and descriptions
 
   points = [
     {lat: 37.967531, lng: 23.694797},
@@ -167,7 +172,30 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
-
+  // TODO redeem and remove points
+  // TODO get award
+  $scope.vouchers = [
+    {
+      description: '1 + 1 Pizza Free',
+      icon: 'https://t4.ftcdn.net/jpg/01/04/18/59/500_F_104185983_85wKjFhEy61N3lS6IVb5il7mxyLELFqJ.jpg',
+      points: 20
+    },
+    {
+      description: '20% discount',
+      icon: 'https://cdn.shopify.com/s/files/1/0825/4215/files/coupon_6256.jpg?6454345827407225597',
+      points: 50
+    },
+    {
+      description: '2 free tickets',
+      icon: 'https://fanbackedcdn.s3.amazonaws.com/b8c76f7a-e4bc-4a14-a2d9-87afaae37eaa.png',
+      points: 100
+    },
+    {
+      description: '100 Euro Travel Expenses',
+      icon: 'https://t3.ftcdn.net/jpg/00/95/78/34/240_F_95783471_mXK1MYkuX8N1ZzNFjvi7wR4ezSKtuH2W.jpg',
+      points: 500
+    },
+  ];
 
 }])
 
@@ -247,7 +275,32 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
+  // TODO modify voucher
+  // TODO add voucher
+  // TODO remove vouchre
 
+  $scope.vouchers = [
+    {
+      description: '1 + 1 Pizza Free',
+      icon: 'https://t4.ftcdn.net/jpg/01/04/18/59/500_F_104185983_85wKjFhEy61N3lS6IVb5il7mxyLELFqJ.jpg',
+      points: 20
+    },
+    {
+      description: '20% discount',
+      icon: 'https://cdn.shopify.com/s/files/1/0825/4215/files/coupon_6256.jpg?6454345827407225597',
+      points: 50
+    },
+    {
+      description: '2 free tickets',
+      icon: 'https://fanbackedcdn.s3.amazonaws.com/b8c76f7a-e4bc-4a14-a2d9-87afaae37eaa.png',
+      points: 100
+    },
+    {
+      description: '100 Euro Travel Expenses',
+      icon: 'https://t3.ftcdn.net/jpg/00/95/78/34/240_F_95783471_mXK1MYkuX8N1ZzNFjvi7wR4ezSKtuH2W.jpg',
+      points: 500
+    },
+  ];
 
 }])
 

@@ -1,14 +1,10 @@
 <ion-view title="Redeem points" id="page11">
   <ion-content padding="true" class="has-header">
     <ion-list id="redeemPoints-list8">
-      <ion-item class="item-thumbnail-left" id="redeemPoints-list-item23">
-        <h2>Discount ticket 20%</h2>
-      </ion-item>
-      <ion-item class="item-thumbnail-left" id="redeemPoints-list-item24">
-        <h2>Discount ticket 25%</h2>
-      </ion-item>
-      <ion-item class="item-thumbnail-left" id="redeemPoints-list-item26">
-        <h2>Discount ticket 30%</h2>
+      <ion-item class="item-thumbnail-left" id="vouchersPromotions-list-item57" ng-repeat="voucher in vouchers">
+        <img ng-src="{{voucher.icon}}" alt="">
+        <h2>{{voucher.description}}</h2>
+        <p>Points: {{voucher.points}}</p>
       </ion-item>
     </ion-list>
   </ion-content>

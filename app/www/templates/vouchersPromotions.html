@@ -2,17 +2,10 @@
   <ion-content padding="true" class="has-header">
     <button ui-sref="addVoucherPromotion" id="vouchersPromotions-button19" class="button button-positive  button-block">Add</button>
     <ion-list id="vouchersPromotions-list14">
-      <ion-item class="item-thumbnail-left" id="vouchersPromotions-list-item57">
-        <h2>Item</h2>
-        <p>10 pt</p>
-      </ion-item>
-      <ion-item class="item-thumbnail-left" id="vouchersPromotions-list-item58">
-        <h2>Item</h2>
-        <p>10 pt</p>
-      </ion-item>
-      <ion-item class="item-thumbnail-left" id="vouchersPromotions-list-item59">
-        <h2>Item</h2>
-        <p>10 pt</p>
+      <ion-item class="item-thumbnail-left" id="vouchersPromotions-list-item57" ng-repeat="voucher in vouchers">
+        <img ng-src="{{voucher.icon}}" alt="">
+        <h2>{{voucher.description}}</h2>
+        <p>Points: {{voucher.points}}</p>
       </ion-item>
     </ion-list>
   </ion-content>
