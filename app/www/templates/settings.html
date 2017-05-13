@@ -3,7 +3,7 @@
     <form id="settings-form8" class="list">
       <label class="item item-select" id="settings-select2" name="mobility">
         <span class="input-label">Mobility</span>
-        <select>
+        <select ng-model="mobility" ng-change="updateMob()">
           <option>Wheelchair</option>
           <option>Blind stick</option>
           <option>Pedestrian</option>
@@ -11,12 +11,12 @@
       </label>
       <label class="item item-select" id="settings-select3" name="units">
         <span class="input-label">Units</span>
-        <select>
+        <select ng-model="units" ng-change="updateUnits()">
           <option>Km(kilometers)</option>
           <option>m(meters)</option>
         </select>
       </label>
-      <ion-checkbox id="settings-checkbox2" name="data">Share data with us</ion-checkbox>
+      <ion-checkbox id="settings-checkbox2" name="data" ng-model="dataShare" ng-change="updateData()">Share data with us</ion-checkbox>
     </form>
   </ion-content>
 </ion-view>
