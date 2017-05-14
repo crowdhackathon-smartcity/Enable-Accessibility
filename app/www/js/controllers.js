@@ -180,7 +180,6 @@ function ($scope, $stateParams, $http, SettingsService) {
   });
 
   // TODO hide municipality
-  // TODO use labels and descriptions
 
   var url = SettingsService.url + '/report?type=obstacle';
   $http.get(url).then(function(response) {
@@ -315,7 +314,6 @@ function ($scope, $stateParams) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $http) {
 
-  // TODO refresh after creating report
   var map = new GMaps({
     div: '#map_nav',
     zoom: 16,
