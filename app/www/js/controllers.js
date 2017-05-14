@@ -194,6 +194,7 @@ function ($scope, $stateParams, $http, SettingsService) {
          lat: report.point.lat,
          lng: report.point.lng,
          label: '!',
+         icon: "https://dl.dropboxusercontent.com/s/56ej4x1njvw1o3p/red_wheel.png?dl=0",
          infoWindow: {
            content: '<h4>' + report.type + '</h4><p>' + report.description  + '</p>  <a href="#/feedback/' + report.id + '" class="button button-small button-positive  button-block">Review</a>'
          }
