@@ -160,10 +160,10 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('municipalityCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('municipalityCtrl', ['$scope', '$stateParams', '$http','SettingsService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams, $http, SettingsService) {
   var map = new GMaps({
     div: '#map_municipality',
     zoom: 13,
@@ -182,21 +182,37 @@ function ($scope, $stateParams) {
   // TODO hide municipality
   // TODO use labels and descriptions
 
-  points = [
-    {lat: 37.967531, lng: 23.694797},
-    {lat: 37.963306, lng: 23.692103},
-    {lat: 37.958329, lng: 23.683769},
-    {lat: 37.959381, lng: 23.683224},
-    {lat: 37.968144, lng: 23.696800}
-  ];
+  var url = SettingsService.url + '/report?type=obstacle';
+  $http.get(url).then(function(response) {
+    var reports = response.data;
 
-  points.forEach(function(point) {
-    map.addMarker({
-       lat: point.lat,
-       lng: point.lng,
-       label: '!'
-   });
-  });
+    reports.forEach(function(report) {
+      map.addMarker({
+         lat: report.point.lat,
+         lng: report.point.lng,
+         label: '!',
+         infoWindow: {
+           content: '<h4>' + report.type + '</h4><p>' + report.description  + '</p>  <a href="#/feedback/' + report.id + '" class="button button-small button-positive  button-block">Review</a>'
+         }
+     });
+    });
+  }, function(error) {});
+
+  // points = [
+  //   {lat: 37.967531, lng: 23.694797},
+  //   {lat: 37.963306, lng: 23.692103},
+  //   {lat: 37.958329, lng: 23.683769},
+  //   {lat: 37.959381, lng: 23.683224},
+  //   {lat: 37.968144, lng: 23.696800}
+  // ];
+  //
+  // points.forEach(function(point) {
+  //   map.addMarker({
+  //      lat: point.lat,
+  //      lng: point.lng,
+  //      label: '!'
+  //  });
+  // });
 }])
 
 .controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
