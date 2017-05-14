@@ -324,7 +324,7 @@ function ($scope, $stateParams, $http) {
 
   var map = new GMaps({
     div: '#map_nav',
-    zoom: 16,
+    zoom: 15,
     lat: 40.624090,
     lng: 22.951060
   });
