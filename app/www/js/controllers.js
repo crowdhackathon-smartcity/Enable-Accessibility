@@ -105,6 +105,10 @@ function ($scope, $stateParams, $state, $http, SettingsService) {
 function ($scope, $http, SettingsService, $stateParams, $state) {
   $scope.type = "ramp";
 
+  $scope.cancel = function() {
+    $state.go("smartAccessibility.map");
+  }
+
   $scope.save = function(type, comment) {
     var url = SettingsService.url + "/report";
     var data = {
