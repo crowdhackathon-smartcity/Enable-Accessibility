@@ -61,7 +61,7 @@ function ($scope, $stateParams, $state, $http, SettingsService) {
         lng: report.point.lng,
         icon: icons[report.type].icon,
         infoWindow: {
-          content: '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i><h4>' + report.type + '</h4><p>' + report.description  + '</p>  <a href="#/feedback/' + report.id + '" class="button button-small button-positive  button-block">Review</a>'
+          content: '<i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i><h4>' + report.type + '</h4><p>' + report.description  + '</p>  <a href="#/feedback/' + report.id + '" class="button button-small button-positive  button-block" >Review</a>'
         }
       });
     });
@@ -271,6 +271,10 @@ function ($scope, $stateParams) {
 function ($scope, $http, $stateParams, $state) {
   $scope.rating = '3';
   console.log($stateParams);
+
+  $scope.cancel = function() {
+    $state.go("smartAccessibility.map");
+  };
 
   $scope.save = function(rating, comment) {
     var url = "http://192.168.0.152:1337/review";
